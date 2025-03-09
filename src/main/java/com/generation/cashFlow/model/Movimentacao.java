@@ -1,6 +1,9 @@
 package com.generation.cashFlow.model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,6 +31,9 @@ public class Movimentacao {
 	@NotBlank(message = "A Origem não pode ser vazia!!")
 	private String origem;
 	
+	@DateTimeFormat(pattern = "dd-MM-yyyyb")
+	private LocalDate data;
+	
 	@ManyToOne
 	@JsonIgnoreProperties("movimentacao")
 	private Categoria categoria;
@@ -35,4 +41,52 @@ public class Movimentacao {
 	@ManyToOne
 	@JsonIgnoreProperties("movimentacao")
 	private Usuario usuario;
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
+
+	public String getOrigem() {
+		return origem;
+	}
+
+	public void setOrigem(String origem) {
+		this.origem = origem;
+	}
+
+	public LocalDate getData() {
+		return data;
+	}
+
+	public void setData(LocalDate data) {
+		this.data = data;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
 }
