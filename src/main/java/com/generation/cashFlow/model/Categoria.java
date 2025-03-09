@@ -23,7 +23,7 @@ public class Categoria {
 	private long id;
 	
 	@NotBlank(message = "Atributo categoria não pode ser vazio!!")
-	private long categoria;
+	private String categoria;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("categoria")
