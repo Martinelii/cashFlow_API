@@ -1,9 +1,16 @@
 package com.generation.cashFlow.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -27,6 +34,10 @@ public class Usuario {
 	@NotBlank(message = "Campo senha é Obrigatorio")
 	@Size(min = 8, message = "Senha deve conter no minimo 8 caracters")
 	private String senha;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE )
+	@JsonIgnoreProperties("usuario")
+	private List<Movimentacao> movimentacao;
 
 	public Usuario(Long id, String nome, String email, String senha) {
 		this.id = id;
@@ -38,6 +49,14 @@ public class Usuario {
 	public Usuario() {	
 	}
 	
+	public List<Movimentacao> getMovimentacao() {
+		return movimentacao;
+	}
+
+	public void setMovimentacao(List<Movimentacao> movimentacao) {
+		this.movimentacao = movimentacao;
+	}
+
 	public long getId() {
 		return id;
 	}
